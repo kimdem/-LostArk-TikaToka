@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TikaToKa PvP MVP</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section id="startView" class="start-view">
+        <div>
+          <p class="eyebrow">PvP Dice Board</p>
+          <h1>TikaToKa</h1>
+        </div>
+        <form id="startForm" class="panel">
+          <label>
+            닉네임
+            <input id="nicknameInput" maxlength="16" autocomplete="nickname" placeholder="예: 김태민" />
+          </label>
+          <button id="createRoomButton" type="button">방 만들기</button>
+          <label>
+            방 코드
+            <input id="roomCodeInput" maxlength="6" autocomplete="off" placeholder="ABC123" />
+          </label>
+          <button id="joinRoomButton" type="button">방 참가</button>
+          <p id="startError" class="error" role="alert"></p>
+        </form>
+      </section>
+
+      <section id="roomView" class="room-view hidden">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">방 코드</p>
+            <h2 id="roomCodeText">------</h2>
+          </div>
+          <div class="actions">
+            <button id="copyButton" type="button">복사</button>
+            <button id="leaveRoomButton" type="button" class="secondary">나가기</button>
+          </div>
+        </header>
+        <div id="waitingPanel" class="panel">
+          <div id="playerList" class="player-list"></div>
+          <p class="muted">상대방이 참가하면 게임이 자동으로 시작됩니다.</p>
+        </div>
+      </section>
+
+      <section id="gameView" class="game-view hidden">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">방 코드</p>
+            <h2 id="gameRoomCode">------</h2>
+          </div>
+          <div class="turn-card">
+            <span id="turnLabel">대기 중</span>
+            <strong id="timerText">15</strong>
+          </div>
+        </header>
+
+        <div class="board-layout">
+          <section class="player-area">
+            <div class="player-meta">
+              <strong id="myName">나</strong>
+              <span id="myScore">0점</span>
+            </div>
+            <div class="board-with-scores mine">
+              <div id="myBoard" class="board"></div>
+              <div id="myLineScores" class="line-scores"></div>
+            </div>
+          </section>
+
+          <section class="dice-panel">
+            <p>현재 주사위</p>
+            <div id="currentDice" class="dice">-</div>
+            <div id="diceOptions" class="dice-options"></div>
+            <button id="rerollButton" type="button" class="secondary">리롤</button>
+            <ol id="eventLog" class="event-log"></ol>
+          </section>
+
+          <section class="player-area opponent">
+            <div class="player-meta">
+              <strong id="opponentName">상대</strong>
+              <span id="opponentScore">0점</span>
+            </div>
+            <div class="board-with-scores rival">
+              <div id="opponentLineScores" class="line-scores"></div>
+              <div id="opponentBoard" class="board"></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="timer-bar" aria-hidden="true">
+          <div id="timerBarFill" class="timer-bar-fill"></div>
+          <span id="timerBarText">15초</span>
+        </div>
+      </section>
+    </main>
+
+    <div id="resultModal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="resultTitle">게임 종료</h2>
+        <p id="resultScore"></p>
+        <div class="actions">
+          <button id="rematchButton" type="button">다시 하기</button>
+          <button id="modalLeaveButton" type="button" class="secondary">방 나가기</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
